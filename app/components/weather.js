@@ -26,7 +26,7 @@ const Weather = () => {
 
     
     return (
-        <div className='relative h-screen w-screen p-2 bg-gradient-to-b from-blue-100 to-blue-400'>
+        <div className='relative h-screen w-screen p-2 bg-gradient-to-b from-blue-300 to-blue-500'>
             <h1 className='absolute font-extrabold top-[20px] left-[20%] text-white text-6xl'>Know Weather In Your Location</h1>
             <div className='absolute top-[150px] left-[44%] flex justify-center space-x-3'>
                 <input type="text"
@@ -40,7 +40,7 @@ const Weather = () => {
                     onClick={fetchData}>
                     Search</button>
             </div>
-            <div className='absolute top-[230px] left-[35%] h-auto w-1/3 bg-white rounded-lg p-3 bg-gradient-to-b from-blue-100 to-blue-400 shadow-2xl'>
+            <div className='absolute top-[230px] left-[35%] h-auto w-1/3 bg-white rounded-lg p-3 bg-gradient-to-b from-blue-300 to-blue-500 shadow-2xl'>
                 <div className='flex justify-between'>
                     <div className='space-y-2'>
                         <h1 className='text-5xl text-white font-sans font-bold'>{data.name}</h1>
