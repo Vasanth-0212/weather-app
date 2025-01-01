@@ -1,27 +1,16 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import img from '../../public/images/weatherbg.jpg';
-//https://github.com/techiuv/weather-app
-//https://github.com/ArunRamachandran/weather
 
 const Weather = () => {
 
-
-    const WeatherIcon = ({ iconCode }) => {
-        const iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`; // Construct the image URL using the icon code
-
-        return (
-            <div>
-                <img src={iconUrl} alt="Weather Icon" className="w-16 h-16" />
-            </div>
-        );
-    };
 
     const [data, setData] = useState([]);
     const [city, setCity] = useState('Suryapet');
 
     const fetchData = async () => {
+        if(city === "") {
+            return;
+        };
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=420dad522eb1e6f9f4f64eb0f934ea90&units=metric`
         );
@@ -35,15 +24,14 @@ const Weather = () => {
         fetchData();
     }, []);
 
-    // useEffect(() => {
-    //     console.log(data.weather);
-    // }, [data])
+    
     return (
-        <div className='relative h-screen w-screen bg-gradient-to-b from-blue-100 to-blue-400'>
-            <h1 className='absolute font-extrabold top-[20px] left-[20%] text-white text-7xl'>Know Weather In Your Location</h1>
+        <div className='relative h-screen w-screen p-2 bg-gradient-to-b from-blue-100 to-blue-400'>
+            <h1 className='absolute font-extrabold top-[20px] left-[20%] text-white text-6xl'>Know Weather In Your Location</h1>
             <div className='absolute top-[150px] left-[44%] flex justify-center space-x-3'>
                 <input type="text"
                     placeholder='Enter City Name'
+                    value={city}
                     className="h-14 w-36 rounded-lg border border-white p-1 focus:outline-none focus:ring-2 focus:ring-blue-300"
                     onChange={(e) => setCity(e.target.value)}
                 />
@@ -52,7 +40,7 @@ const Weather = () => {
                     onClick={fetchData}>
                     Search</button>
             </div>
-            <div className='absolute top-[230px] left-[35%] h-auto w-1/3 bg-white rounded-lg p-3 bg-transparent shadow-2xl'>
+            <div className='absolute top-[230px] left-[35%] h-auto w-1/3 bg-white rounded-lg p-3 bg-gradient-to-b from-blue-100 to-blue-400 shadow-2xl'>
                 <div className='flex justify-between'>
                     <div className='space-y-2'>
                         <h1 className='text-5xl text-white font-sans font-bold'>{data.name}</h1>
@@ -65,23 +53,23 @@ const Weather = () => {
                 </div>
                 <div className='flex  space-x-2 mt-2'>
                     <div className='flex items-center justify-center h-16 w-1/2 border shadow-2xl rounded-lg bg-transparent'>
-                        <h1 className='text-white font-bold text-2xl'>{data.main ? "Pressue - " + data.main.pressure + "Pa" : ""}</h1>
+                        <h1 className='text-white font-bold text-1xl'>{data.main ? "Pressue - " + data.main.pressure + "Pa" : ""}</h1>
                     </div>
                     <div className='flex items-center justify-center h-16 w-1/2 border shadow-2xl rounded-lg bg-transparent'>
-                        <h1 className='text-white font-bold text-2xl'>{data.main ? "Humidity - " + data.main.humidity + "" : ""}</h1>
-                    </div>
-                </div>
-                <div className='flex  space-x-2 mt-2'>
-                    <div className='flex items-center justify-center h-16 w-1/2 border shadow-2xl rounded-lg bg-transparent'>
-                        <h1 className='text-white font-bold text-2xl'>{data.main ? "Max Temp - " + data.main.temp_max + "°C" : ""}</h1>
-                    </div>
-                    <div className='flex items-center justify-center h-16 w-1/2 border shadow-2xl rounded-lg bg-transparent'>
-                        <h1 className='text-white font-bold text-2xl'>{data.main ? "Min Temp - " + data.main.temp_min + "°C" : ""}</h1>
+                        <h1 className='text-white font-bold text-1xl'>{data.main ? "Humidity - " + data.main.humidity + "" : ""}</h1>
                     </div>
                 </div>
                 <div className='flex  space-x-2 mt-2'>
                     <div className='flex items-center justify-center h-16 w-1/2 border shadow-2xl rounded-lg bg-transparent'>
-                        <h1 className='text-white font-bold text-2xl'>{data.wind ? "Wind Speed - " + data.wind.speed + " m/s" : ""}</h1>
+                        <h1 className='text-white font-bold text-1xl'>{data.main ? "Max Temp - " + data.main.temp_max + "°C" : ""}</h1>
+                    </div>
+                    <div className='flex items-center justify-center h-16 w-1/2 border shadow-2xl rounded-lg bg-transparent'>
+                        <h1 className='text-white font-bold text-1xl'>{data.main ? "Min Temp - " + data.main.temp_min + "°C" : ""}</h1>
+                    </div>
+                </div>
+                <div className='flex  space-x-2 mt-2'>
+                    <div className='flex items-center justify-center h-16 w-1/2 border shadow-2xl rounded-lg bg-transparent'>
+                        <h1 className='text-white font-bold text-1xl'>{data.wind ? "Wind Speed - " + data.wind.speed + " m/s" : ""}</h1>
                     </div>
                     
                 </div>
